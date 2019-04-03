@@ -8,6 +8,7 @@ const moment = require('moment');
 
 let login_status = false;
 //global initialize area
+let logFile = fs.createWriteStream(path.resolve(`./${moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')}.log`));
 const bot = Wechaty.instance({profile: 'autoLogin'});
 bot.on('scan', (qrcode, status) => {
     if (status === 0 && !login_status) {
@@ -22,15 +23,15 @@ bot.on('login', user => {
     console.log(`用户 ${user} 登录成功!`);
     main(user);
 });
+
+
 bot.on('logout', (user) => {
     console.log(`用户 ${user} 退出`);
-    process.exit();
+    exit();
 });
 bot.on('error', (error) => {
     console.error(`发生错误, ${error}`);
-    bot.stop().then(() => {
-        process.exit();
-    });
+    exit();
 });
 bot.start();
 
@@ -61,9 +62,14 @@ async function actionWithContact(contact) {
     await contact.say(`${contact.name()}, 测试消息`);
 }
 
-let ws = fs.createWriteStream(path.resolve(`./${moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')}.log`));
 
 function log(line) {
     console.log(line);
-    ws.write(line + '\n');
+    logFile.write(line + '\n');
+}
+
+function exit() {
+    bot.stop().then(() => {
+        process.exit();
+    });
 }
