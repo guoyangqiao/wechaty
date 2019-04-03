@@ -11,7 +11,6 @@ const {FileBox} = require('file-box');
 const qrCodeTerm = require('qrcode-terminal');
 const fs = require('fs');
 const path = require('path');
-const moment = require('moment');
 
 //global initialize area
 let login_status = false;
