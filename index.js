@@ -5,9 +5,11 @@ const fs = require('fs');
 const path = require('path');
 const moment = require('moment');
 
-let login_status = false;
 //global initialize area
-let logFile = fs.createWriteStream(path.resolve(`./${moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')}.log`));
+let login_status = false;
+initLogDir();
+let logFile = fs.createWriteStream(path.resolve(`./logs/${moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')}.log`));
+//bot initialize
 const bot = Wechaty.instance({profile: 'autoLogin'});
 bot.on('scan', (qrcode, status) => {
     if (status === 0) {
@@ -16,24 +18,18 @@ bot.on('scan', (qrcode, status) => {
             log("扫描二维码登录微信");
         }
     }
-});
-bot.on('login', async user => {
+}).on('login', async user => {
     log(`用户 ${user.name()} 登录成功`);
     login_status = true;
     await main(user);
     log("处理结束");
-});
-
-
-bot.on('logout', (user) => {
+}).on('logout', (user) => {
     log(`用户 ${user.name()} 退出`);
     exit();
-});
-bot.on('error', (error) => {
+}).on('error', (error) => {
     log(`发生错误, ${error}`);
     exit();
-});
-bot.start();
+}).start();
 
 //functions======================
 async function main(user) {
@@ -66,5 +62,11 @@ function log(line) {
 function exit() {
     bot.stop().then(() => {
         process.exit();
+    });
+}
+
+function initLogDir() {
+    fs.mkdir('./logs', () => {
+
     });
 }
