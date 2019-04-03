@@ -44,7 +44,6 @@ async function main(user) {
                 if (contact !== null && contact.friend()) {
                     actionWithContact(contact);
                     log(`${cName}-成功`);
-
                 } else {
                     log(`${cName}-没有这个账号或者不是好友`);
                 }
