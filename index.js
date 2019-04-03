@@ -44,7 +44,6 @@ function main(user) {
     lineReader.on('line', function (cName) {
         bot.Contact.find({name: cName}).then(
             async (contact) => {
-                console.log();
                 if (contact !== null && contact.friend()) {
                     await actionWithContact(contact);
                     log(`${cName}-成功`);
@@ -65,5 +64,6 @@ async function actionWithContact(contact) {
 let ws = fs.createWriteStream(path.resolve(`./${moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')}.log`));
 
 function log(line) {
+    console.log(line);
     ws.write(line + '\n');
 }
