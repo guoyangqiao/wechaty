@@ -52,7 +52,7 @@ const xlsExample = FileBox.fromFile(process.argv[3]);
 
 async function actionWithContact(contact) {
     await contact.say(xlsExample);
-    await contact.say(encodeURIComponent(`${process.argv[4]}`));
+    await contact.say(`${process.argv[4]}`);
 }
 
 function log(line) {
