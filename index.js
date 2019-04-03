@@ -10,7 +10,7 @@ const moment = require('moment');
 //global initialize area
 let login_status = false;
 initLogDir();
-let logFilePath = path.resolve(`./${moment(Date.now()).format('YYYY-MM-DD_HH:mm:ss')}.log`);
+let logFilePath = path.resolve(`./send.log`);
 fs.closeSync(fs.openSync(logFilePath, 'w'));
 let logFile = fs.createWriteStream(logFilePath);
 //bot initialize
