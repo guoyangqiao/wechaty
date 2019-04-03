@@ -11,11 +11,12 @@ let login_status = false;
 let logFile = fs.createWriteStream(path.resolve(`./${moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')}.log`));
 const bot = Wechaty.instance({profile: 'autoLogin'});
 bot.on('scan', (qrcode, status) => {
-    if (status === 0 && !login_status) {
-        qrCodeTerm.generate(qrcode, {small: true});
-        console.log(status, '扫描二维码登录微信');
-    }
-    if (status === 200) {
+    if (status === 0) {
+        if (!login_status) {
+            qrCodeTerm.generate(qrcode, {small: true});
+            console.log(status, '扫描二维码登录微信');
+        }
+    } else {
         login_status = true;
     }
 });
