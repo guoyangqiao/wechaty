@@ -1,0 +1,18 @@
+{
+  "name": "com.guoyangqiao.wechaty",
+  "version": "1.0.0",
+  "description": "for fun",
+  "main": "index.js",
+  "repository": "www.guoyangqiao.com",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "brolog": "^1.8.3",
+    "file-box": "^0.8.27",
+    "wechaty": "^0.22.6",
+    "wechaty-puppet": "^0.14.1"
+  }
+}
