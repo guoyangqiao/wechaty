@@ -3,7 +3,6 @@ const {FileBox} = require('file-box');
 const qrCodeTerm = require('qrcode-terminal');
 const fs = require('fs');
 const path = require('path');
-const readline = require('readline');
 const moment = require('moment');
 
 let login_status = false;
@@ -18,10 +17,11 @@ bot.on('scan', (qrcode, status) => {
         }
     }
 });
-bot.on('login', user => {
+bot.on('login', async user => {
     console.log(`用户 ${user.name()} 登录成功`);
     login_status = true;
-    main(user);
+    await main(user);
+    console.log(`用户 ${user.name()} 登录=============`);
 });
 
 
@@ -36,13 +36,12 @@ bot.on('error', (error) => {
 bot.start();
 
 //functions======================
-function main(user) {
+async function main(user) {
     const contactFile = process.argv[2];
-    const lineReader = readline.createInterface({
-        input: fs.createReadStream(contactFile)
-    });
-    lineReader.on('line', cName => {
-        bot.Contact.find({name: cName}).then(
+    let s = fs.readFileSync(path.resolve(contactFile), 'UTF-8');
+    for (const cName of s.split('\n')) {
+        log(`开始处理${cName}`);
+        await bot.Contact.find({name: cName}).then(
             async (contact) => {
                 if (contact !== null && contact.friend()) {
                     actionWithContact(contact);
@@ -51,7 +50,7 @@ function main(user) {
                     log(`${cName}-没有这个账号或者不是好友`);
                 }
             });
-    });
+    }
 }
 
 const xlsExample = FileBox.fromFile(process.argv[3]);
