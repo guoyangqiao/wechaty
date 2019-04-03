@@ -26,8 +26,9 @@ bot.on('logout', (user) => {
 });
 bot.on('error', (error) => {
     console.error(`发生错误, ${error}`);
-    bot.stop();
-    process.exit();
+    bot.stop().then(() => {
+        process.exit();
+    });
 });
 bot.start();
 
@@ -45,7 +46,7 @@ function main(user) {
                     await actionWithContact(contact);
                     console.log(`成功`);
                 } else {
-                    console.log(`没有这个人或者不是你的好友`);
+                    console.log(`没有这个账号或者不是你的好友`);
                 }
             });
     });
