@@ -5,8 +5,12 @@ const qrTerm = require('qrcode-terminal');
 //global initialize area
 const bot = Wechaty.instance({profile: 'autoLogin'});
 bot.on('scan', (qrcode, status) => {
-    qrTerm.generate(qrcode, {small: true});
-    console.log('扫描上面的二维码来登录你的微信');
+    if (status === 0) {
+        qrTerm.generate(qrcode, {small: true});
+        console.log('扫描二维码登录微信');
+    } else {
+        //不做任何操作
+    }
 });
 bot.on('login', user => {
     console.log(`用户 ${user} 登录成功!`);
@@ -14,6 +18,7 @@ bot.on('login', user => {
 });
 bot.on('logout', (user) => {
     console.log(`用户 ${user} 退出`);
+    process.exit();
 });
 bot.on('发生错误', (error) => {
     console.error(error)
