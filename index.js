@@ -21,7 +21,7 @@ bot.on('scan', (qrcode, status) => {
 });
 bot.on('login', user => {
     console.log(`用户 ${user} 登录成功!`);
-    core(user);
+    main(user);
 });
 bot.on('logout', (user) => {
     console.log(`用户 ${user} 退出`);
@@ -34,7 +34,7 @@ bot.on('error', (error) => {
 bot.start();
 
 //functions======================
-function core(user) {
+function main(user) {
     const lineReader = readline.createInterface({
         input: fs.createReadStream(contactFile),
         crlfDelay: Infinity
