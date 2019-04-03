@@ -10,7 +10,7 @@ const moment = require('moment');
 //global initialize area
 let login_status = false;
 initLogDir();
-let logFile = fs.createWriteStream(path.resolve(`./logs/${moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')}.log`));
+let logFile = fs.createWriteStream(path.resolve(`./logs/${moment(Date.now()).format('YYYY-MM-DD_HH:mm:ss')}.log`));
 //bot initialize
 const bot = Wechaty.instance({profile: 'autoLogin'});
 bot.on('scan', (qrcode, status) => {
