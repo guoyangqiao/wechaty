@@ -34,6 +34,7 @@ bot.start();
 
 //functions======================
 function main(user) {
+    const contactFile = process.argv[2];
     const lineReader = readline.createInterface({
         input: fs.createReadStream(contactFile),
         crlfDelay: Infinity
@@ -52,9 +53,7 @@ function main(user) {
     });
 }
 
-const docFile = process.argv[2];
-const contactFile = process.argv[3];
-const xlsExample = FileBox.fromFile(docFile);
+const xlsExample = FileBox.fromFile(process.argv[3]);
 
 async function actionWithContact(contact) {
     await contact.say(xlsExample);
