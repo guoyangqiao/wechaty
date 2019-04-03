@@ -4,7 +4,7 @@
 //npm config set registry https://registry.npm.taobao.org
 //npm config set puppeteer_download_host=https://npm.taobao.org/mirrors
 //git clone https://github.com/guoyangqiao/wechaty.git or other way
-//create log file
+//create log file like > send_history.log
 //npm install
 //node index.js ContactList.txt XLS file "words"
 //TODO list
@@ -18,7 +18,7 @@ const path = require('path');
 
 //global initialize area
 let login_status = false;
-let logFile = fs.createWriteStream(path.resolve(`./send.log`));
+let logFile = fs.createWriteStream(path.resolve(`./send_history.log`));
 //bot initialize
 const bot = Wechaty.instance({profile: 'autoLogin'});
 bot.on('scan', (qrcode, status) => {
