@@ -13,6 +13,7 @@
     "brolog": "^1.8.3",
     "chromium": "^2.1.0",
     "file-box": "^0.8.27",
+    "moment": "^2.24.0",
     "puppeteer": "^1.14.0",
     "qrcode-terminal": "^0.12.0",
     "wechaty": "^0.22.6",

@@ -2,7 +2,9 @@ const {Wechaty} = require('wechaty');
 const {FileBox} = require('file-box');
 const qrCodeTerm = require('qrcode-terminal');
 const fs = require('fs');
+const path = require('path');
 const readline = require('readline');
+const moment = require('moment');
 
 let login_status = false;
 //global initialize area
@@ -42,12 +44,12 @@ function main(user) {
     lineReader.on('line', function (cName) {
         bot.Contact.find({name: cName}).then(
             async (contact) => {
-                console.log(`${cName}-`);
+                console.log();
                 if (contact !== null && contact.friend()) {
                     await actionWithContact(contact);
-                    console.log(`成功`);
+                    log(`${cName}-成功`);
                 } else {
-                    console.log(`没有这个账号或者不是你的好友`);
+                    log(`${cName}-没有这个账号或者不是你的好友`);
                 }
             });
     });
@@ -58,4 +60,10 @@ const xlsExample = FileBox.fromFile(process.argv[3]);
 async function actionWithContact(contact) {
     await contact.say(xlsExample);
     await contact.say(`${contact.name()}, 测试消息`);
+}
+
+let ws = fs.createWriteStream(path.resolve(`./${moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')}.log`));
+
+function log(line) {
+    ws.write(line + '\n');
 }
