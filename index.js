@@ -1,3 +1,4 @@
+//PROCESS:
 //install node
 //install git
 //npm config set registry https://registry.npm.taobao.org
@@ -6,6 +7,9 @@
 //create log file
 //npm install
 //node index.js ContactList.txt XLS file "words"
+//TODO list
+//1.graceful shutdown
+//2. confirm before action
 const {Wechaty} = require('wechaty');
 const {FileBox} = require('file-box');
 const qrCodeTerm = require('qrcode-terminal');
@@ -36,7 +40,7 @@ bot.on('scan', (qrcode, status) => {
     log(`发生错误, ${error}`);
     exit();
 }).start();
-//TODO 1.graceful shutdown 2.
+
 //functions======================
 async function main(user) {
     const contactFile = process.argv[2];
