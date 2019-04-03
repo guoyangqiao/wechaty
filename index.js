@@ -55,7 +55,7 @@ const xlsExample = FileBox.fromFile(process.argv[3]);
 
 async function actionWithContact(contact) {
     await contact.say(xlsExample);
-    await contact.say(`${contact.name()}, 测试消息`);
+    await contact.say(`银の龙の背に乗って`);
 }
 
 function log(line) {
