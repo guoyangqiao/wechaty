@@ -49,7 +49,7 @@ function main(user) {
                     await actionWithContact(contact);
                     log(`${cName}-成功`);
                 } else {
-                    log(`${cName}-没有这个账号或者不是你的好友`);
+                    log(`${cName}-没有这个账号或者不是好友`);
                 }
             });
     });
