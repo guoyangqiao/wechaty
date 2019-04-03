@@ -13,23 +13,23 @@ bot.on('scan', (qrcode, status) => {
     if (status === 0) {
         if (!login_status) {
             qrCodeTerm.generate(qrcode, {small: true});
-            console.log("扫描二维码登录微信");
+            log("扫描二维码登录微信");
         }
     }
 });
 bot.on('login', async user => {
-    console.log(`用户 ${user.name()} 登录成功`);
+    log(`用户 ${user.name()} 登录成功`);
     login_status = true;
     await main(user);
 });
 
 
 bot.on('logout', (user) => {
-    console.log(`用户 ${user.name()} 退出`);
+    log(`用户 ${user.name()} 退出`);
     exit();
 });
 bot.on('error', (error) => {
-    console.error(`发生错误, ${error}`);
+    log(`发生错误, ${error}`);
     exit();
 });
 bot.start();
