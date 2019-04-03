@@ -1,5 +1,10 @@
-// npm config set registry https://registry.npm.taobao.org
+//install node
+//install git
+//npm config set registry https://registry.npm.taobao.org
 //npm config set puppeteer_download_host=https://npm.taobao.org/mirrors
+//git clone https://github.com/guoyangqiao/wechaty.git or other way
+//npm install
+//node index.js ContactList.txt XLS file "words"
 const {Wechaty} = require('wechaty');
 const {FileBox} = require('file-box');
 const qrCodeTerm = require('qrcode-terminal');
@@ -31,7 +36,7 @@ bot.on('scan', (qrcode, status) => {
     log(`发生错误, ${error}`);
     exit();
 }).start();
-
+//TODO 1.graceful shutdown 2.
 //functions======================
 async function main(user) {
     const contactFile = process.argv[2];
