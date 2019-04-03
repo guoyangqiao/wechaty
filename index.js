@@ -21,6 +21,7 @@ bot.on('login', async user => {
     log(`用户 ${user.name()} 登录成功`);
     login_status = true;
     await main(user);
+    log("处理结束");
 });
 
 
@@ -43,12 +44,13 @@ async function main(user) {
                 if (contact !== null && contact.friend()) {
                     actionWithContact(contact);
                     log(`${cName}-成功`);
+
                 } else {
                     log(`${cName}-没有这个账号或者不是好友`);
                 }
             });
+
     }
-    log("处理结束");
 }
 
 const xlsExample = FileBox.fromFile(process.argv[3]);
