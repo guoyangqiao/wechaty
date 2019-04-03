@@ -1,3 +1,5 @@
+// npm config set registry https://registry.npm.taobao.org
+//npm config set puppeteer_download_host=https://npm.taobao.org/mirrors
 const {Wechaty} = require('wechaty');
 const {FileBox} = require('file-box');
 const qrCodeTerm = require('qrcode-terminal');
