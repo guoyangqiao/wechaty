@@ -17,6 +17,7 @@
     "puppeteer": "^1.14.0",
     "qrcode-terminal": "^0.12.0",
     "wechaty": "^0.22.6",
-    "wechaty-puppet": "^0.14.1"
+    "wechaty-puppet": "^0.14.1",
+    "wechaty-puppet-puppeteer": "^0.14.1"
   }
 }
