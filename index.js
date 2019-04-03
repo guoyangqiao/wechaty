@@ -8,7 +8,7 @@
 //npm install
 //node index.js ContactList.txt XLS file "words"
 //TODO list
-//1.graceful shutdown
+//1. graceful shutdown
 //2. confirm before action
 const {Wechaty} = require('wechaty');
 const {FileBox} = require('file-box');
