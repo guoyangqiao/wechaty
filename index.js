@@ -4,14 +4,10 @@ const qrTerm = require('qrcode-terminal');
 
 //global initialize area
 const bot = Wechaty.instance({profile: 'autoLogin'});
-// bot.on('scan', (qrcode, status) => {
-//     qrTerm.generate(qrcode, {small: true});
-//     const qrcodeImageUrl = [
-//         'https://api.qrserver.com/v1/create-qr-code/?data=',
-//         encodeURIComponent(qrcode),
-//     ].join('');
-//     console.log(`[${status}] ${qrcodeImageUrl}\n扫描上面的二维码来登录你的微信`);
-// });
+bot.on('scan', (qrcode, status) => {
+    qrTerm.generate(qrcode, {small: true});
+    console.log('扫描上面的二维码来登录你的微信');
+});
 bot.on('login', user => {
     console.log(`用户 ${user} 登录成功!`);
     core(user);
