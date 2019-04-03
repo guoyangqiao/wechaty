@@ -3,7 +3,7 @@ const {FileBox} = require('file-box');
 const qrTerm = require('qrcode-terminal');
 
 //global initialize area
-const bot = new Wechaty();
+const bot = new Wechaty({profile: 'autoLogin'});
 bot.on('scan', (qrcode, status) => {
     qrTerm.generate(qrcode, {small: true});
     const qrcodeImageUrl = [
@@ -28,12 +28,11 @@ bot.start();
 function core(user) {
     var docFile = process.argv[2];
     var contactFile = process.argv[3];
-    let contact = bot.Contact.load("wiThy3Justc");
-    console.log(contact);
     // const xlsExample = FileBox.fromFile('/Users/guoyangqiao/Desktop/JVMS.xls');
     // bot.Contact.find({name: "CLOTGTRYC"}).then(
     //     (contact) => {
     //         contact.say(xlsExample);
     //     });
+    console.log("执行结束");
 }
 
