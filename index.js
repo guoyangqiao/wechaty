@@ -1,6 +1,6 @@
-const {Wechaty} = require('wechaty');
-const {FileBox} = require('file-box');
-const qrTerm = require('qrcode-terminal');
+const Wechaty = require('wechaty');
+const FileBox = require('file-box');
+const qrCodeTerm = require('qrcode-terminal');
 const fs = require('fs');
 const readline = require('readline');
 
@@ -8,7 +8,7 @@ const readline = require('readline');
 const bot = Wechaty.instance({profile: 'autoLogin'});
 bot.on('scan', (qrcode, status) => {
     if (status === 0) {
-        qrTerm.generate(qrcode, {small: true});
+        qrCodeTerm.generate(qrcode, {small: true});
         console.log(status, '扫描二维码登录微信');
     }
 });
@@ -20,8 +20,9 @@ bot.on('logout', (user) => {
     console.log(`用户 ${user} 退出`);
     process.exit();
 });
-bot.on('发生错误', (error) => {
-    console.error(error)
+bot.on('error', (error) => {
+    console.error(`发生错误, ${error}`);
+    process.exit();
 });
 bot.start();
 
