@@ -14,20 +14,19 @@ bot.on('scan', (qrcode, status) => {
     if (status === 0) {
         if (!login_status) {
             qrCodeTerm.generate(qrcode, {small: true});
-            console.log(status, '扫描二维码登录微信');
+            console.log("扫描二维码登录微信");
         }
-    } else {
-        login_status = true;
     }
 });
 bot.on('login', user => {
-    console.log(`用户 ${user} 登录成功!`);
+    console.log(`用户 ${user.name()} 登录成功!\n`);
+    login_status = true;
     main(user);
 });
 
 
 bot.on('logout', (user) => {
-    console.log(`用户 ${user} 退出`);
+    console.log(`用户 ${user.name()} 退出`);
     exit();
 });
 bot.on('error', (error) => {
