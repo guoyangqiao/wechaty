@@ -5,9 +5,6 @@ const fs = require('fs');
 const readline = require('readline');
 
 let login_status = false;
-const docFile = process.argv[2];
-const contactFile = process.argv[3];
-const xlsExample = FileBox.fromFile(docFile);
 //global initialize area
 const bot = Wechaty.instance({profile: 'autoLogin'});
 bot.on('scan', (qrcode, status) => {
@@ -29,6 +26,7 @@ bot.on('logout', (user) => {
 });
 bot.on('error', (error) => {
     console.error(`发生错误, ${error}`);
+    bot.stop();
     process.exit();
 });
 bot.start();
@@ -41,18 +39,23 @@ function main(user) {
     });
     lineReader.on('line', function (cName) {
         bot.Contact.find({name: cName}).then(
-            (contact) => {
-                console.log(`对联系人${cName}进行操作`);
+            async (contact) => {
+                console.log(`${cName}-`);
                 if (contact !== null && contact.friend()) {
-                    actionWithContact(contact);
+                    await actionWithContact(contact);
+                    console.log(`成功`);
                 } else {
-                    console.log(`${cName}->没有这个人或者不是你的好友`);
+                    console.log(`没有这个人或者不是你的好友`);
                 }
             });
     });
-    console.log("执行结束");
 }
 
-function actionWithContact(contact) {
-    contact.say(xlsExample);
+const docFile = process.argv[2];
+const contactFile = process.argv[3];
+const xlsExample = FileBox.fromFile(docFile);
+
+async function actionWithContact(contact) {
+    await contact.say(xlsExample);
+    await contact.say(`${contact.name()}, 测试消息`);
 }
