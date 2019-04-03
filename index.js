@@ -33,9 +33,6 @@ bot.on('error', (error) => {
 });
 bot.start();
 
-
-
-
 //functions======================
 function core(user) {
     const lineReader = readline.createInterface({
