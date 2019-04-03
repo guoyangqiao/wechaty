@@ -3,15 +3,15 @@ const {FileBox} = require('file-box');
 const qrTerm = require('qrcode-terminal');
 
 //global initialize area
-const bot = new Wechaty({profile: 'autoLogin'});
-bot.on('scan', (qrcode, status) => {
-    qrTerm.generate(qrcode, {small: true});
-    const qrcodeImageUrl = [
-        'https://api.qrserver.com/v1/create-qr-code/?data=',
-        encodeURIComponent(qrcode),
-    ].join('');
-    console.log(`[${status}] ${qrcodeImageUrl}\n扫描上面的二维码来登录你的微信`);
-});
+const bot = Wechaty.instance({profile: 'autoLogin'});
+// bot.on('scan', (qrcode, status) => {
+//     qrTerm.generate(qrcode, {small: true});
+//     const qrcodeImageUrl = [
+//         'https://api.qrserver.com/v1/create-qr-code/?data=',
+//         encodeURIComponent(qrcode),
+//     ].join('');
+//     console.log(`[${status}] ${qrcodeImageUrl}\n扫描上面的二维码来登录你的微信`);
+// });
 bot.on('login', user => {
     console.log(`用户 ${user} 登录成功!`);
     core(user);
@@ -19,7 +19,7 @@ bot.on('login', user => {
 bot.on('logout', (user) => {
     console.log(`用户 ${user} 退出`);
 });
-bot.on('error', (error) => {
+bot.on('发生错误', (error) => {
     console.error(error)
 });
 bot.start();
