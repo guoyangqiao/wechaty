@@ -9,10 +9,7 @@ const moment = require('moment');
 
 //global initialize area
 let login_status = false;
-initLogDir();
-let logFilePath = path.resolve(`./send.log`);
-fs.closeSync(fs.openSync(logFilePath, 'w'));
-let logFile = fs.createWriteStream(logFilePath);
+let logFile = fs.createWriteStream(path.resolve(`./send.log`));
 //bot initialize
 const bot = Wechaty.instance({profile: 'autoLogin'});
 bot.on('scan', (qrcode, status) => {
@@ -66,11 +63,5 @@ function log(line) {
 function exit() {
     bot.stop().then(() => {
         process.exit();
-    });
-}
-
-function initLogDir() {
-    fs.mkdir('./logs', () => {
-
     });
 }
