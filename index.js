@@ -19,7 +19,7 @@ bot.on('scan', (qrcode, status) => {
     }
 });
 bot.on('login', user => {
-    console.log(`用户 ${user.name()} 登录成功!\n================================`);
+    console.log(`用户 ${user.name()} 登录成功`);
     login_status = true;
     main(user);
 });
@@ -39,10 +39,9 @@ bot.start();
 function main(user) {
     const contactFile = process.argv[2];
     const lineReader = readline.createInterface({
-        input: fs.createReadStream(contactFile),
-        crlfDelay: Infinity
+        input: fs.createReadStream(contactFile)
     });
-    lineReader.on('line', function (cName) {
+    lineReader.on('line', cName => {
         bot.Contact.find({name: cName}).then(
             async (contact) => {
                 if (contact !== null && contact.friend()) {
@@ -52,10 +51,7 @@ function main(user) {
                     log(`${cName}-没有这个账号或者不是好友`);
                 }
             });
-    }).on('close', function () {
-        console.log("================================");
     });
-    lineReader.close();
 }
 
 const xlsExample = FileBox.fromFile(process.argv[3]);
