@@ -19,7 +19,7 @@ bot.on('scan', (qrcode, status) => {
     }
 });
 bot.on('login', user => {
-    console.log(`用户 ${user.name()} 登录成功!\n`);
+    console.log(`用户 ${user.name()} 登录成功!\n================================`);
     login_status = true;
     main(user);
 });
@@ -52,7 +52,10 @@ function main(user) {
                     log(`${cName}-没有这个账号或者不是好友`);
                 }
             });
+    }).on('close', function () {
+        console.log("================================");
     });
+    lineReader.close();
 }
 
 const xlsExample = FileBox.fromFile(process.argv[3]);
