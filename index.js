@@ -48,7 +48,6 @@ async function main(user) {
                     log(`${cName}-没有这个账号或者不是好友`);
                 }
             });
-
     }
 }
 
