@@ -27,8 +27,8 @@ bot.start();
 
 //functions======================
 function core(user) {
-    var docFile = process.argv[2];
-    var contactFile = process.argv[3];
+    const docFile = process.argv[2];
+    const contactFile = process.argv[3];
     const xlsExample = FileBox.fromFile(docFile);
     const lineReader = readline.createInterface({
         input: fs.createReadStream(contactFile),
