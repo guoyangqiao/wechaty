@@ -21,7 +21,6 @@ bot.on('login', async user => {
     console.log(`用户 ${user.name()} 登录成功`);
     login_status = true;
     await main(user);
-    console.log(`用户 ${user.name()} 登录=============`);
 });
 
 
@@ -38,9 +37,7 @@ bot.start();
 //functions======================
 async function main(user) {
     const contactFile = process.argv[2];
-    let s = fs.readFileSync(path.resolve(contactFile), 'UTF-8');
-    for (const cName of s.split('\n')) {
-        log(`开始处理${cName}`);
+    for (const cName of fs.readFileSync(path.resolve(contactFile), 'UTF-8').split('\n')) {
         await bot.Contact.find({name: cName}).then(
             async (contact) => {
                 if (contact !== null && contact.friend()) {
