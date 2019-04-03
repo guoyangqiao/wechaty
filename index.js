@@ -57,7 +57,7 @@ async function actionWithContact(contact) {
 
 function log(line) {
     console.log(line);
-    logFile.write(line + '\n');
+    logFile.write(line + '\r\n');
 }
 
 function exit() {
