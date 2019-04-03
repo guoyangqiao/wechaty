@@ -48,6 +48,7 @@ async function main(user) {
                 }
             });
     }
+    log("处理结束");
 }
 
 const xlsExample = FileBox.fromFile(process.argv[3]);
