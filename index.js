@@ -62,7 +62,6 @@ async function actionWithContact(contact) {
     await contact.say(`${contact.name()}, 测试消息`);
 }
 
-
 function log(line) {
     console.log(line);
     logFile.write(line + '\n');
